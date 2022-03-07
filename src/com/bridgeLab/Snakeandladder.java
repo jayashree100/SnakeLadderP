@@ -8,7 +8,11 @@ import java.util.Scanner;
 
 public class Snakeandladder {
 	               
-	final static int WINPOINT = 100;
+	   public static final int NO_PLAY = 0;
+	   public static final int LADDER = 1;
+	   public static final int SNAKE = 2;
+	   public static final int START = 0;
+
 
 
 	static Map<Integer,Integer> snake = new HashMap<Integer,Integer>();
