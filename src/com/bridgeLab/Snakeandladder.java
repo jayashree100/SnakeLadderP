@@ -1,9 +1,5 @@
 package com.bridgeLab;
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.Scanner;
 
 
 public class Snakeandladder {
@@ -15,118 +11,45 @@ public class Snakeandladder {
 
 
 
-	static Map<Integer,Integer> snake = new HashMap<Integer,Integer>();
-	static Map<Integer,Integer> ladder = new HashMap<Integer,Integer>();
-
-	{
-		snake.put(99,54);
-		snake.put(70,55);
-		snake.put(52,42);
-		snake.put(25,2);
-		snake.put(95,72);
-
-		ladder.put(6,25);
-		ladder.put(11,40);
-		ladder.put(60,85);
-		ladder.put(46,90);
-		ladder.put(17,69);
-	}
-
-
-
-	public int rollDice() {
-	
-		int n = 0;
-		Random r = new Random();
-		n=r.nextInt(7);
-		return (n==0?1:n);
-	}
-	
-	public void startGame()
-	{
-		int player1 =0, player2=0;
-		int currentPlayer=-1;
-		Scanner s = new Scanner(System.in);
-		String str;
-		int diceValue =0;
-		do
-		{
-			System.out.println(currentPlayer==-1?"\n\nFIRST PLAYER TURN":"\n\nSECOND PLAYER TURN");
-			System.out.println("Press r to roll Dice");
-			str = s.next();
-			diceValue = rollDice();
-			System.out.println("You get : "+ diceValue);
-
-			if(currentPlayer == -1)
-			{
-				player1 = calculatePlayerValue(player1,diceValue);
-				System.out.println("First Player :: " + player1);
-				System.out.println("Second Player :: " + player2);
-				System.out.println("------------------");
-				if(isWin(player1))
-				{
-					System.out.println("First player wins");
-					return;
-				}
-			}
-			else
-			{
-				player2 = calculatePlayerValue(player2,diceValue);
-				System.out.println("First Player :: " + player1);
-				System.out.println("Second Player :: " + player2);
-				System.out.println("------------------");
-				if(isWin(player2))
-				{
-					System.out.println("Second player wins");
-					return;
-				}
-			}
-
-			currentPlayer= -currentPlayer;
-
-
-		}while("r".equals(str));
-	}
-
-
-	public int calculatePlayerValue(int player, int diceValue)
-	{
-		player = player + diceValue;
-
-		if(player > WINPOINT)
-		{
-			player = player - diceValue;
-			return player;
-		}
-
-		if(null!=snake.get(player))
-		{
-			System.out.println("swallowed by snake");
-			player= snake.get(player);
-		}
-
-		if(null!=ladder.get(player))
-		{
-			System.out.println("climb up the ladder");
-			player= ladder.get(player);
-		}
-		return player;
-	}
-
-	public boolean isWin(int player)
-	{
-		return WINPOINT == player;
-	}
-
-
-
-	
 	
 	public static void main(String[] args) {
 		
-		Snakeandladder sl = new Snakeandladder();
-		sl.startGame();
 		
+		int pos = 0;
+	      System.out.println("Starting position of player is: " + START);
+	      while(pos <= 100){
+	      int roll = (int) (Math.floor(Math.random() * 10) % 6 + 1);
+	      System.out.println("Number on rolled dice is : " +roll);
+	      int con = (int) (Math.floor(Math.random() * 10) % 3);
+	      System.out.println("Condition: " +con);
+	      switch (con){
+	            case NO_PLAY:
+	                  System.out.println("New Position is: " + pos);
+	                  break;
+	            case LADDER:
+	                  pos = pos + roll;
+	                  System.out.println("New Position is: " + pos);
+	                  break;
+	            case SNAKE:
+	                  pos = pos - roll;
+	                  if (pos >= 0 )
+	                  System.out.println("New Position is: " + pos);
+	                  else
+	                  pos = 0;
+	                  System.out.println("New Position is: " + pos);
+	                  break;
+	            default:
+	                  System.out.println("Default");
+	                  break;
+	         }
+	      }
+	      System.out.println();
+	      if (pos >= 100)
+	      System.out.println("-------------------");
+	      System.out.println("    PLAYER WON");
+	      System.out.println("-------------------");
+	      }
+
 	}
 }
 
