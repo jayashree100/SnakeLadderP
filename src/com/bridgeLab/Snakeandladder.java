@@ -43,13 +43,13 @@ public class Snakeandladder {
 	                  break;
 	         }
 	      }
+	      
 	      System.out.println();
-	      if (pos >= 100)
+	      if (pos == 100)
 	      System.out.println("-------------------");
 	      System.out.println("    PLAYER WON");
 	      System.out.println("-------------------");
 	      }
-
 	}
 }
 
